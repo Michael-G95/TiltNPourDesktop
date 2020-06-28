@@ -1,40 +1,31 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
     return (
-        <nav className="">
-            <Link className="navbar-brand" to="#">Navbar</Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <Link class="navbar-brand" to="#">Navbar</Link>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <Link className="nav-link" to="#">Home <span className="sr-only">(current)</span></Link>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <Link class="nav-link" to="#">Home <span class="sr-only">(current)</span></Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="#">Link</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link" to="#">Features</Link>
                     </li>
-                    <li className="nav-item dropdown">
-                        <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-        </Link>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <Link className="dropdown-item" to="#">Action</Link>
-                            <Link className="dropdown-item" to="#">Another action</Link>
-                            <div className="dropdown-divider"></div>
-                            <Link className="dropdown-item" to="#">Something else here</Link>
-                        </div>
+                    <li class="nav-item">
+                        <Link class="nav-link" to="#">Pricing</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link disabled" to="#">Disabled</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link disabled" to="#">Disabled</Link>
                     </li>
                 </ul>
             </div>
         </nav>
- );
+    );
 }
 
 export default Menu;
