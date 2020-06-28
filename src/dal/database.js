@@ -32,15 +32,28 @@ const insertBreweryFromUi = (item) => {
     return insertItem(item, (x) => new Brewery.Model(Brewery.populateBreweryFields(x)));
 }
 
+const mapObjectIdToId = (args)=>{
+    
+    if(Array.isArray(args)){
+        return args.map(a=>{
+
+            let tmp = {...a,id:a._id.toString()}
+            delete tmp._id;
+            return tmp;
+            });
+    }else{
+        args.id = args._id.toString()
+    }
+}
+
 const getAllBreweries = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find((err, results) => {
+        Brewery.Model.find().lean().exec((err, results)  => {
             if (err)
                 reject(err);
-            else{
-                console.log("RESULTS: ",results);
-                resolve(results);}
+            else
+                resolve(mapObjectIdToId(results));
 
         }) 
     });
@@ -49,14 +62,16 @@ const getAllBreweries = () => {
 const getBrewery = (id)=>{
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find({object_id:ObjectId(id)},(err, results) => {
+        Brewery.Model.find({_id:ObjectId(id)}).lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
-                resolve(results);
+                resolve(mapObjectIdToId(results));
         })
     });
 }
+
+
 
 module.exports = {
     insertBreweryFromUi,

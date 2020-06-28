@@ -7,7 +7,7 @@ export default () => {
     const history = useHistory();
 
     const onSelectBrewery = (item) => {
-        history.push('/EditBrewery/' + item.object_id);
+        history.push('/EditBrewery/' + item.id);
     }
 
     const onDbGetComplete = (items)=>{
@@ -27,15 +27,17 @@ export default () => {
     if (breweries.length === 0) {
         return <div>Loading...</div>
     };
-    console.log(breweries);
+
     const breweriesHtml = breweries.map((b) => {
         return (
-            <li className="list-group-item" key={b.object_id}>
-                <div className="col-6">
-                    {b.name}
-                </div>
-                <div className="col-6">
-                    <button className="btn btn-primary" type="button" onClick={()=>onSelectBrewery(b)}>Edit</button>
+            <li className="list-group-item" key={b.id}>
+                <div className="container-fluid row">
+                    <div className="w-50">
+                        {b.name}
+                    </div>
+                    <div className="w-50">
+                        <button className="btn btn-primary" type="button" onClick={()=>onSelectBrewery(b)}>Edit</button>
+                    </div>
                 </div>
             </li>
         );

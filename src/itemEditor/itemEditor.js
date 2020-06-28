@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import StringField from './StringField'
 import ArrayField from './ArrayField'
-export default ({ getObject, onSubmit }) => {
-    const [item, setItem] = useState(getObject());
+export default ({ object=null, getObject, onSubmit }) => {
+    const [item, setItem] = useState(object === null ? getObject() : object);
     const [fields, setFields] = useState([]);
     const [loaded, setLoaded] = useState(false);
+
+    console.log(item);
 
     useEffect(() => {
         const tmpFields = [];
@@ -29,7 +31,7 @@ export default ({ getObject, onSubmit }) => {
                     setItem(tmp);
                 })
             }
-
+            console.log(field);
             tmpFields.push(field);
         }
         setFields(tmpFields);
@@ -41,13 +43,12 @@ export default ({ getObject, onSubmit }) => {
             <div>Loading...</div>
         );
     }
-
     const fieldsHtml = fields.map(field => field.fieldHtml);
 
     return (
         <>
             {fieldsHtml}
-            <button type="button" class="btn btn-primary mb-5" onClick={()=>onSubmit(item)}>Add to database</button>
+            <button type="button" className="btn btn-primary mb-5" onClick={()=>onSubmit(item)}>Add to database</button>
         </>
     )
 }
