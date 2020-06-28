@@ -15,7 +15,7 @@ cache:
     - $HOME/.cache/electron-builder
 
 script:
-  - yarn release
+  - npm run dist-mac
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
 
