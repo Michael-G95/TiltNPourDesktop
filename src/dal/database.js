@@ -1,40 +1,36 @@
-import { createBrewery } from './brewery';
-
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
+const Brewery = require('./brewery');
+const mongoose = require('mongoose');
 
 // Connection URL
 const url = "mongodb+srv://devel:HTCjoVDQBXEH9inZ@cluster0-xrkzw.mongodb.net/tiltnpour?retryWrites=true&w=majority";
 
-var insertDocuments = function (db, callback) {
-    // Get the documents collection
-    var collection = db.collection('documents');
+console.log("Connecting...");
+mongoose.connect(url, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on('error', (x = null, y = null) => console.log(x, y));
+db.once('open', function () {
+    console.log("Connected OK");
+});
 
-    // Insert some documents
-    collection.insertMany([
-        createBrewery(), createBrewery()
-    ], function (err, result) {
-        assert.equal(err, null);
-        assert.equal(3, result.result.n);
-        assert.equal(3, result.ops.length);
-        console.log("Inserted 3 documents into the collection");
-        callback(result);
-    });
-}
 
-// Use connect method to connect to the server
-export const testDb = () => {
-    console.log(url);
-    MongoClient.connect(url, function (err, db) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server");
+const insertItem = (item, createItem) => {
+    // Item contains the fields from the UI named same as object
+    const theItem = createItem({ ...item });
 
-        insertDocuments(db, function () {
-            db.close();
+    return new Promise((resolve, reject) => {
+        theItem.save((err, obj) => {
+            if (err) reject(err);
+            else resolve(obj);
         });
-    });
-
-
-
-
+      });
 }
+
+const insertBreweryFromUi = (item) => {
+    // Try to save the object. 
+    // returns the promise
+    return insertItem(item, (x) => new Brewery.Model(Brewery.populateBreweryFields(x)));
+}
+
+module.exports = {
+    insertBreweryFromUi
+};

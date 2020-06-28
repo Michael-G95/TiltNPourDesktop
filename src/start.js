@@ -1,8 +1,8 @@
 const electron = require('electron')
-const app = electron.app
 const path = require('path')
 const isDev = require('electron-is-dev')
-const BrowserWindow = electron.BrowserWindow
+const database = require('./dal/database');
+const { app, BrowserWindow, Menu, ipcMain } = electron
 
 let mainWindow
 
@@ -39,4 +39,23 @@ app.on('activate', () => {
     createWindow()
   }
   mainWindow.removeMenu()
+})
+
+// Ensure a consistent event response to frontend
+// insertCompleted or insertFailed
+const callInsertAndSendResponseEvent = (fn, item) => {
+  console.log("callInsertAndSendResponseEvent");
+  fn(item)
+    .then((obj) => {
+        mainWindow.webContents.send('insertCompleted');
+    })
+    .catch(err=>{
+      console.log(err);
+      mainWindow.webContents.send('insertFailed');
+    })
+}
+
+ipcMain.on('insert-brewery', function (event, item) {
+  console.log("insert-brewery");
+  callInsertAndSendResponseEvent(database.insertBreweryFromUi,item);
 })

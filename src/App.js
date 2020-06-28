@@ -7,7 +7,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import EditBreweries from './breweries/editBreweries';
+import AddBrewery from './breweries/AddBrewery';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/breweries" exact>
-            <EditBreweries />
+          <Route path="/addbrewery" exact>
+            <AddBrewery />
           </Route>
           <Route path="/">
             <Main />
