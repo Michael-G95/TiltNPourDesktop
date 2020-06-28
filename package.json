@@ -24,7 +24,8 @@
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "build/icon.icns"
-    }
+    },
+    "extends": null
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

@@ -35,19 +35,21 @@ const insertBreweryFromUi = (item) => {
 const getAllBreweries = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.find((err, results) => {
+        Brewery.Model.find((err, results) => {
             if (err)
                 reject(err);
-            else
-                resolve(results);
-        })
+            else{
+                console.log("RESULTS: ",results);
+                resolve(results);}
+
+        }) 
     });
 }
 
 const getBrewery = (id)=>{
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.find({object_id:ObjectId(id)},(err, results) => {
+        Brewery.Model.find({object_id:ObjectId(id)},(err, results) => {
             if (err)
                 reject(err);
             else
@@ -58,5 +60,6 @@ const getBrewery = (id)=>{
 
 module.exports = {
     insertBreweryFromUi,
-    getAllBreweries
+    getAllBreweries,
+    getBrewery
 };

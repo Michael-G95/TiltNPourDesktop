@@ -1,15 +1,15 @@
 const electron = require('electron')
-const app = electron.app
 const path = require('path')
 const isDev = require('electron-is-dev')
-const BrowserWindow = electron.BrowserWindow
+const database = require('./dal/database');
+const { app, BrowserWindow, Menu, ipcMain } = electron
 
 let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -41,3 +41,32 @@ app.on('activate', () => {
   mainWindow.removeMenu()
 })
 
+// Ensure a consistent event response to frontend
+// insertCompleted or insertFailed
+const callDbAndSendResponseEvent =  (fn, item) => {
+  console.log("callInsertAndSendResponseEvent");
+  fn(item)
+    .then((obj) => {
+        mainWindow.webContents.send('dbCompleted',obj);
+    })
+    .catch(err=>{
+      console.log(err);
+      mainWindow.webContents.send('dbFailed',err);
+    })
+}
+
+ipcMain.on('insert-brewery', function (event, item) {
+  console.log("insert-brewery");
+  callDbAndSendResponseEvent(database.insertBreweryFromUi,item);
+})
+
+ipcMain.on('get-breweries',function(event,item){
+  console.log('get-breweries');
+  callDbAndSendResponseEvent(database.getAllBreweries,null);
+})
+
+ipcMain.on('get-brewery',function(event,item){
+  console.log('get-brewery');
+  callDbAndSendResponseEvent(database.getBrewery,item);
+  
+});

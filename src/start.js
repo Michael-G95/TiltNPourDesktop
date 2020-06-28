@@ -43,15 +43,15 @@ app.on('activate', () => {
 
 // Ensure a consistent event response to frontend
 // insertCompleted or insertFailed
-const callDbAndSendResponseEvent = (fn, item) => {
+const callDbAndSendResponseEvent =  (fn, item) => {
   console.log("callInsertAndSendResponseEvent");
   fn(item)
     .then((obj) => {
-        mainWindow.webContents.send('insertCompleted',obj);
+        mainWindow.webContents.send('dbCompleted',obj);
     })
     .catch(err=>{
       console.log(err);
-      mainWindow.webContents.send('insertFailed',err);
+      mainWindow.webContents.send('dbFailed',err);
     })
 }
 

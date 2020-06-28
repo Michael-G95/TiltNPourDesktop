@@ -10,15 +10,15 @@ const withDeRegisterHandlers= (fn,item) =>{
 
 // Registers pass to be called on 'insertCompleted' and fail to be called on 'insertFailed', then both removed from the listeners so one is called once only. 
 const registerOnDbCompleteHandlers = (pass,fail) => {
-    ipcRenderer.on('insertCompleted', (item) => withDeRegisterHandlers(pass,item))
-    ipcRenderer.on('insertFailed', (error) => withDeRegisterHandlers(fail,error));
+    ipcRenderer.on('dbCompleted', (item) => withDeRegisterHandlers(pass,item))
+    ipcRenderer.on('dbFailed', (error) => withDeRegisterHandlers(fail,error));
 }
 
 
 
 const deRegisterDbHandlers = (fn)=>{
-    ipcRenderer.removeListener('insertFailed', fn);
-    ipcRenderer.removeListener('insertCompleted', fn);
+    ipcRenderer.removeListener('dbFailed', fn);
+    ipcRenderer.removeListener('dbCompleted', fn);
 }
 
 const sendIpcEvent = (eventName, obj) => {
