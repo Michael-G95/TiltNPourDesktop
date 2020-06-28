@@ -25,7 +25,7 @@ export default  () => {
         <div className="container-fluid">
 
             <form>
-                <ItemEditor getObject={() => Brewery.createEmptyObject({})} onSubmit={onFormSubmit} />
+                <ItemEditor getObject={() => Brewery.createEmptyObject({})} onSubmit={onFormSubmit} btnString={"Add item to database"} />
             </form>
             
         </div>

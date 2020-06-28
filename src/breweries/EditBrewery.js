@@ -28,6 +28,7 @@ export default () => {
         alert("Error in adding to database: " + error);
     }
     const onFormSubmit = (item) => {
+        console.log("submit")
         commsHelper.registerOnDbCompleteHandlers(onDbEditComplete, onDbEditFail);
         commsHelper.sendIpcEvent('update-brewery', item);
     }
@@ -52,7 +53,7 @@ export default () => {
         <div className="container-fluid">
 
             <form>
-                <ItemEditor object={brewery} getObject={() => brewery} onSubmit={() => onFormSubmit} />
+                <ItemEditor object={brewery} getObject={() => brewery} onSubmit={(item) => onFormSubmit(item)} btnString={"Update database"} />
             </form>
 
         </div>

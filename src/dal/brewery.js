@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 // (item)=>new Brewery.Schema(Brewery.populateBreweryFields(item))
 // This pattern ensures the Brewery object has the required fields, initialised to "" if not present
 
-const populateBreweryFields = ({name="",established="",street_address="",town="",county="",country="",postcode="",website="",email="",telephone="",
+const populateBreweryFields = ({id="",name="",established="",street_address="",town="",county="",country="",postcode="",website="",email="",telephone="",
                                 facebook="",twitter="",instagram="",trading_as="",company_number="",companies_house_url="",distributors=[]})=>{
+console.log(id)
     return {
+        id,
         name,
         established,
         street_address,
