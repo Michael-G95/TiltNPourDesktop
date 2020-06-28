@@ -1,5 +1,6 @@
 const Brewery = require('./brewery');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // Connection URL
 const url = "mongodb+srv://devel:HTCjoVDQBXEH9inZ@cluster0-xrkzw.mongodb.net/tiltnpour?retryWrites=true&w=majority";
@@ -22,7 +23,7 @@ const insertItem = (item, createItem) => {
             if (err) reject(err);
             else resolve(obj);
         });
-      });
+    });
 }
 
 const insertBreweryFromUi = (item) => {
@@ -31,6 +32,31 @@ const insertBreweryFromUi = (item) => {
     return insertItem(item, (x) => new Brewery.Model(Brewery.populateBreweryFields(x)));
 }
 
+const getAllBreweries = () => {
+    return new Promise((resolve, reject) => {
+        // eslint-disable-next-line array-callback-return
+        Brewery.find((err, results) => {
+            if (err)
+                reject(err);
+            else
+                resolve(results);
+        })
+    });
+}
+
+const getBrewery = (id)=>{
+    return new Promise((resolve, reject) => {
+        // eslint-disable-next-line array-callback-return
+        Brewery.find({object_id:ObjectId(id)},(err, results) => {
+            if (err)
+                reject(err);
+            else
+                resolve(results);
+        })
+    });
+}
+
 module.exports = {
-    insertBreweryFromUi
+    insertBreweryFromUi,
+    getAllBreweries
 };

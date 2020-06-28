@@ -8,6 +8,8 @@ import {
   Route
 } from "react-router-dom";
 import AddBrewery from './breweries/AddBrewery';
+import EditBrewery from './breweries/EditBrewery';
+import FindEditBrewery from './breweries/FindEditBrewery';
 
 function App() {
   return (
@@ -21,6 +23,15 @@ function App() {
           <Route path="/addbrewery" exact>
             <AddBrewery />
           </Route>
+          <Route path="/editbrewery/:id" exact>
+            <EditBrewery />
+          </Route>
+          <Route path="/editbrewery" exact>
+            <FindEditBrewery />
+          </Route>
+
+
+
           <Route path="/">
             <Main />
           </Route>

@@ -20,5 +20,5 @@ export default (fieldName,value,setValue)=>{
 
 function formatFieldName(str) { 
     let fmtStr =  (str[0].toUpperCase() + str.slice(1)); 
-    return fmtStr.replace('_',' ');
+    return fmtStr.replace(/_/g,' ');
 } 

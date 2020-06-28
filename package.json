@@ -15,7 +15,7 @@
     "directories": {
       "buildResources": "assets"
     },
-    "productName": "Tilt N Pour Desktop",
+    "productName": "Tilt-N-Pour-Desktop",
     "copyright": "Copyright © year ${author}",
     "win": {
       "target": "msi",
