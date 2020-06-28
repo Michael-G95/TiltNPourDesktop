@@ -15,8 +15,7 @@ cache:
     - $HOME/.cache/electron-builder
 
 script:
-  - |
-      yarn release
+  - yarn release
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
 
