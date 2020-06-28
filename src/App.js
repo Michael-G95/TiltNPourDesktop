@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import Menu from './menu/menu';
+import Main from './root/main'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+import EditBreweries from './breweries/editBreweries';
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/breweries" exact>
+            <EditBreweries />
+          </Route>
           <Route path="/">
-            Hi
+            <Main />
           </Route>
         </Switch>
       </div>
