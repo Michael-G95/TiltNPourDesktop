@@ -35,7 +35,7 @@
     "cross-env": "^7.0.2",
     "electron-is-dev": "^1.2.0",
     "jquery": "^3.5.1",
-    "mongoose": "^5.9.20",
+    "mongoose": "^5.13.15",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
